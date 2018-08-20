@@ -24,6 +24,7 @@ import Widget03 from '../../views/Widgets/Widget03'
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
 import axios from 'axios';
+import DateRangePicker from 'react-bootstrap-daterangepicker';
 
 const brandPrimary = getStyle('--primary')
 const brandSuccess = getStyle('--success')
@@ -285,12 +286,53 @@ const socialChartOpts = {
 
 const pie = {
   labels: [
-    'Auto Albert Actions',
-    'Stupid Human Actions',
+    '% Auto Actions ',
+    '% Manual Actions',
   ],
   datasets: [
     {
-      data: [70, 30],
+      data: [63, 37],
+      backgroundColor: [
+        '#FF6384',
+        '#36A2EB',
+
+      ],
+      hoverBackgroundColor: [
+        '#FF6384',
+        '#36A2EB',
+      ],
+    }],
+};
+
+
+const pieGoogle = {
+  labels: [
+    '% Auto Actions ',
+    '% Manual Actions',
+  ],
+  datasets: [
+    {
+      data: [67, 33],
+      backgroundColor: [
+        '#FF6384',
+        '#36A2EB',
+
+      ],
+      hoverBackgroundColor: [
+        '#FF6384',
+        '#36A2EB',
+      ],
+    }],
+};
+
+const pieFacbook = {
+  labels: [
+    '% Auto Actions ',
+    '% Manual Actions',
+  ],
+  datasets: [
+    {
+      data: [59, 41],
       backgroundColor: [
         '#FF6384',
         '#36A2EB',
@@ -495,6 +537,32 @@ const mainChartOpts = {
   },
 };
 
+
+const bar = {
+  labels: ['FB ad creation', 'Google ads creation', 'FB budget changes', 'CC budget changes'],
+  datasets: [
+    {
+      label: 'Manual Charts Ratio',
+      backgroundColor: 'rgba(255,99,132,0.2)',
+      borderColor: 'rgba(255,99,132,1)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(255,99,132,1)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data: [53,75,78,64],
+    },
+  ],
+};
+
+const options = {
+  tooltips: {
+    enabled: false,
+    custom: CustomTooltips
+  },
+  maintainAspectRatio: false
+}
+
+const featureDrop = ['Shimi', 'David']
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -505,6 +573,11 @@ class Dashboard extends Component {
     this.state = {
       dropdownOpen: false,
       radioSelected: 2,
+      dropdownOpenFeature: false,
+      dropdownOpenProvider:false,
+      dropdownOpenAccount:false,
+      dropdownOpenCampaign:false,
+      dropdownOpenDR:false
     };
   }
 
@@ -516,11 +589,12 @@ class Dashboard extends Component {
     })
   }
 
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen,
-    });
-  }
+
+    toggle(dropDownName) {
+      this.setState({
+        [dropDownName]: !this.state[dropDownName],
+      });
+    }
 
   onRadioBtnClick(radioSelected) {
     this.setState({
@@ -532,17 +606,162 @@ class Dashboard extends Component {
 
     return (
       <div className="animated fadeIn">
+
+
+        <Row>
+        <Col sm="2" md={{ size: 10, offset: 1 }}>
+        <Card>
+        <CardBody>
+          <Row>
+            <Col sm="2">
+            <Dropdown isOpen={this.state.dropdownOpenFeature} toggle={()=>this.toggle('dropdownOpenFeature')}>
+                         <DropdownToggle caret>
+                           Feature
+                         </DropdownToggle>
+                         <DropdownMenu>
+                           {featureDrop.map((item, i) => (
+                               <DropdownItem value={item} key={i} onClick={this.onDropClick} >{item}</DropdownItem>
+                            ))}
+                         </DropdownMenu>
+                       </Dropdown>
+            </Col >
+            <Col sm="2">
+            <Dropdown isOpen={this.state.dropdownOpenProvider} toggle={()=>this.toggle('dropdownOpenProvider')}>
+                         <DropdownToggle caret>
+                           Provider
+                         </DropdownToggle>
+                         <DropdownMenu>
+                           {featureDrop.map((item, i) => (
+                               <DropdownItem value={item} key={i} onClick={this.onDropClick} >{item}</DropdownItem>
+                            ))}
+                         </DropdownMenu>
+                       </Dropdown>
+            </Col >
+            <Col sm="2">
+            <Dropdown isOpen={this.state.dropdownOpenAccount} toggle={()=>this.toggle('dropdownOpenAccount')}>
+                         <DropdownToggle caret>
+                           Account
+                         </DropdownToggle>
+                         <DropdownMenu>
+                           {featureDrop.map((item, i) => (
+                               <DropdownItem value={item} key={i} onClick={this.onDropClick} >{item}</DropdownItem>
+                            ))}
+                         </DropdownMenu>
+                       </Dropdown>
+            </Col >
+
+            <Col sm="2">
+            <Dropdown isOpen={this.state.dropdownOpenCampaign} toggle={()=>this.toggle('dropdownOpenCampaign')}>
+                         <DropdownToggle caret>
+                           Campaign
+                         </DropdownToggle>
+                         <DropdownMenu>
+                           {featureDrop.map((item, i) => (
+                               <DropdownItem value={item} key={i} onClick={this.onDropClick} >{item}</DropdownItem>
+                            ))}
+                         </DropdownMenu>
+                       </Dropdown>
+            </Col >
+            <Col sm="2">
+            <Dropdown isOpen={this.state.dropdownOpenDR} toggle={()=>this.toggle('dropdownOpenDR')}>
+                         <DropdownToggle caret>
+                           DR taken the action
+                         </DropdownToggle>
+                         <DropdownMenu>
+                           {featureDrop.map((item, i) => (
+                               <DropdownItem value={item} key={i} onClick={this.onDropClick} >{item}</DropdownItem>
+                            ))}
+                         </DropdownMenu>
+                       </Dropdown>
+            </Col >
+            <Col sm="2">
+                <DateRangePicker startDate="1/1/2014" endDate="3/1/2014">
+                     <i className="cui-calendar icons font-4xl  mt-5"></i>
+                </DateRangePicker>
+            </Col>
+          </Row>
+
+        </CardBody>
+        </Card>
+        </Col>
+        </Row  >
+
+
+        <Row>
+          <Col xs="6" sm="10" lg="6">
+            <div className="brand-card">
+              <div className="brand-card-header bg-twitter">
+                <i className="fa">Albert</i>
+                <div className="chart-wrapper">
+                  <Line data={makeSocialBoxData(1)} options={socialChartOpts} height={90} />
+                </div>
+              </div>
+              <div className="brand-card-body">
+                <div>
+                  <div className="text-value">1061</div>
+                  <div className="text-uppercase text-muted small">Automated Actions</div>
+                </div>
+                <div>
+                  <div className="text-value">612</div>
+                  <div className="text-uppercase text-muted small">Manual Actions</div>
+                </div>
+              </div>
+            </div>
+          </Col>
+
+          <Col xs="6" sm="6" lg="3">
+            <div className="brand-card">
+              <div className="brand-card-header bg-facebook">
+                <i className="cui-social-facebook icons font-4xl d-block mt-2"></i>
+                <div className="chart-wrapper">
+                  <Line data={makeSocialBoxData(2)} options={socialChartOpts} height={90} />
+                </div>
+              </div>
+              <div className="brand-card-body">
+                <div>
+                  <div className="text-value">455</div>
+                  <div className="text-uppercase text-muted small">Automated Actions</div>
+                </div>
+                <div>
+                  <div className="text-value">320</div>
+                  <div className="text-uppercase text-muted small">Manual Actions</div>
+                </div>
+              </div>
+            </div>
+          </Col>
+
+          <Col xs="6" sm="6" lg="3">
+            <div className="brand-card">
+              <div className="brand-card-header bg-google-plus">
+                <i className="fa fa-google-plus"></i>
+                <div className="chart-wrapper">
+                  <Line data={makeSocialBoxData(3)} options={socialChartOpts} height={90} />
+                </div>
+              </div>
+              <div className="brand-card-body">
+                <div>
+                  <div className="text-value">606</div>
+                  <div className="text-uppercase text-muted small">Automated Actions</div>
+                </div>
+                <div>
+                  <div className="text-value">292</div>
+                  <div className="text-uppercase text-muted small">Manual Actions</div>
+                </div>
+              </div>
+            </div>
+          </Col>
+        </Row>
         <Row>
           <Col xs="18" sm="8" lg="4">
             <Card>
               <CardHeader>
-                Doughnut System
+                Google
                 <div className="card-header-actions">
                 </div>
               </CardHeader>
               <CardBody>
                 <div className="chart-wrapper">
-                  <Doughnut data={doughnut} />
+                  <Pie data={pieGoogle} />
                 </div>
               </CardBody>
             </Card>
@@ -550,7 +769,7 @@ class Dashboard extends Component {
           <Col xs="18" sm="8" lg="4">
             <Card>
               <CardHeader>
-                System Actions
+                Albert
                 <div className="card-header-actions">
                 </div>
               </CardHeader>
@@ -564,261 +783,35 @@ class Dashboard extends Component {
           <Col xs="18" sm="8" lg="4">
             <Card>
               <CardHeader>
-                System Actions
+                Facbook
                 <div className="card-header-actions">
                 </div>
               </CardHeader>
               <CardBody>
                 <div className="chart-wrapper">
-                  <Pie data={pie} />
+                  <Pie data={pieFacbook} />
                 </div>
               </CardBody>
             </Card>
           </Col>
         </Row>
         <Row>
-            <Col>
+              <Col xs="9" sm="12" lg="15" >
               <Card>
+                <CardHeader>
+                  Manual Actions Reasons
+                  <div className="card-header-actions">
+                  </div>
+                </CardHeader>
                 <CardBody>
-                  <Row>
-                    <Col sm="5">
-                      <CardTitle className="mb-0">Traffic</CardTitle>
-                      <div className="small text-muted">November 2015</div>
-                    </Col>
-                    <Col sm="7" className="d-none d-sm-inline-block">
-                      <Button color="primary" className="float-right"><i className="icon-cloud-download"></i></Button>
-                      <ButtonToolbar className="float-right" aria-label="Toolbar with button groups">
-                        <ButtonGroup className="mr-3" aria-label="First group">
-                          <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(1)} active={this.state.radioSelected === 1}>Day</Button>
-                          <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(2)} active={this.state.radioSelected === 2}>Month</Button>
-                          <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(3)} active={this.state.radioSelected === 3}>Year</Button>
-                        </ButtonGroup>
-                      </ButtonToolbar>
-                    </Col>
-                  </Row>
-                  <div className="chart-wrapper" style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
-                    <Line data={mainChart} options={mainChartOpts} height={300} />
+                  <div className="chart-wrapper">
+                    <Bar data={bar} options={options} />
                   </div>
                 </CardBody>
               </Card>
             </Col>
           </Row>
-        <Row>
-          <Col>
-            <Card>
-              <CardHeader>
-                Traffic {' & '} Sales
-              </CardHeader>
-              <CardBody>
-                <Row>
-                  <Col xs="12" md="6" xl="6">
-                    <Row>
-                      <Col sm="6">
-                        <div className="callout callout-info">
-                          <small className="text-muted">New Clients</small>
-                          <br />
-                          <strong className="h4">9,123</strong>
-                          <div className="chart-wrapper">
-                            <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
-                          </div>
-                        </div>
-                      </Col>
-                      <Col sm="6">
-                        <div className="callout callout-danger">
-                          <small className="text-muted">Recurring Clients</small>
-                          <br />
-                          <strong className="h4">22,643</strong>
-                          <div className="chart-wrapper">
-                            <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
-                          </div>
-                        </div>
-                      </Col>
-                    </Row>
-                    <hr className="mt-0" />
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                          Monday
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="34" />
-                        <Progress className="progress-xs" color="danger" value="78" />
-                      </div>
-                    </div>
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Tuesday
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="56" />
-                        <Progress className="progress-xs" color="danger" value="94" />
-                      </div>
-                    </div>
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Wednesday
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="12" />
-                        <Progress className="progress-xs" color="danger" value="67" />
-                      </div>
-                    </div>
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Thursday
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="43" />
-                        <Progress className="progress-xs" color="danger" value="91" />
-                      </div>
-                    </div>
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Friday
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="22" />
-                        <Progress className="progress-xs" color="danger" value="73" />
-                      </div>
-                    </div>
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Saturday
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="53" />
-                        <Progress className="progress-xs" color="danger" value="82" />
-                      </div>
-                    </div>
-                    <div className="progress-group mb-4">
-                      <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Sunday
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="9" />
-                        <Progress className="progress-xs" color="danger" value="69" />
-                      </div>
-                    </div>
-                    <div className="legend text-center">
-                      <small>
-                        <sup className="px-1"><Badge pill color="info">&nbsp;</Badge></sup>
-                        New clients
-                        &nbsp;
-                        <sup className="px-1"><Badge pill color="danger">&nbsp;</Badge></sup>
-                        Recurring clients
-                      </small>
-                    </div>
-                  </Col>
-                  <Col xs="12" md="6" xl="6">
-                    <Row>
-                      <Col sm="6">
-                        <div className="callout callout-warning">
-                          <small className="text-muted">Pageviews</small>
-                          <br />
-                          <strong className="h4">78,623</strong>
-                          <div className="chart-wrapper">
-                            <Line data={makeSparkLineData(2, brandWarning)} options={sparklineChartOpts} width={100} height={30} />
-                          </div>
-                        </div>
-                      </Col>
-                      <Col sm="6">
-                        <div className="callout callout-success">
-                          <small className="text-muted">Organic</small>
-                          <br />
-                          <strong className="h4">49,123</strong>
-                          <div className="chart-wrapper">
-                            <Line data={makeSparkLineData(3, brandSuccess)} options={sparklineChartOpts} width={100} height={30} />
-                          </div>
-                        </div>
-                      </Col>
-                    </Row>
-                    <hr className="mt-0" />
-                    <ul>
-                      <div className="progress-group">
-                        <div className="progress-group-header">
-                          <i className="icon-user progress-group-icon"></i>
-                          <span className="title">Male</span>
-                          <span className="ml-auto font-weight-bold">43%</span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress className="progress-xs" color="warning" value="43" />
-                        </div>
-                      </div>
-                      <div className="progress-group mb-5">
-                        <div className="progress-group-header">
-                          <i className="icon-user-female progress-group-icon"></i>
-                          <span className="title">Female</span>
-                          <span className="ml-auto font-weight-bold">37%</span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress className="progress-xs" color="warning" value="37" />
-                        </div>
-                      </div>
-                      <div className="progress-group">
-                        <div className="progress-group-header">
-                          <i className="icon-globe progress-group-icon"></i>
-                          <span className="title">Organic Search</span>
-                          <span className="ml-auto font-weight-bold">191,235 <span className="text-muted small">(56%)</span></span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress className="progress-xs" color="success" value="56" />
-                        </div>
-                      </div>
-                      <div className="progress-group">
-                        <div className="progress-group-header">
-                          <i className="icon-social-facebook progress-group-icon"></i>
-                          <span className="title">Facebook</span>
-                          <span className="ml-auto font-weight-bold">51,223 <span className="text-muted small">(15%)</span></span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress className="progress-xs" color="success" value="15" />
-                        </div>
-                      </div>
-                      <div className="progress-group">
-                        <div className="progress-group-header">
-                          <i className="icon-social-twitter progress-group-icon"></i>
-                          <span className="title">Twitter</span>
-                          <span className="ml-auto font-weight-bold">37,564 <span className="text-muted small">(11%)</span></span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress className="progress-xs" color="success" value="11" />
-                        </div>
-                      </div>
-                      <div className="progress-group">
-                        <div className="progress-group-header">
-                          <i className="icon-social-linkedin progress-group-icon"></i>
-                          <span className="title">LinkedIn</span>
-                          <span className="ml-auto font-weight-bold">27,319 <span className="text-muted small">(8%)</span></span>
-                        </div>
-                        <div className="progress-group-bars">
-                          <Progress className="progress-xs" color="success" value="8" />
-                        </div>
-                      </div>
-                      <div className="divider text-center">
-                        <Button color="link" size="sm" className="text-muted" data-toggle="tooltip" data-placement="top"
-                                title="" data-original-title="show more"><i className="icon-options"></i></Button>
-                      </div>
-                    </ul>
-                  </Col>
-                </Row>
-                <br />
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
+
       </div>
     );
   }
