@@ -380,7 +380,7 @@ class Graphs extends Component {
                        </Dropdown>
             </Col >
             <Col sm="2">
-                <DateRangePicker startDate="1/1/2014" endDate="3/1/2014">
+                <DateRangePicker startDate="1/8/2018" endDate="10/8/2014">
                      <i className="cui-calendar icons font-4xl  mt-5"></i>
                 </DateRangePicker>
             </Col>
@@ -407,7 +407,7 @@ class Graphs extends Component {
               </Col>
           </Row>
           <Row>
-          <Col xs="25" sm="14" lg="22">
+          <Col xs="12" sm="12" lg="35">
           <Card>
             <CardHeader>
               Manual Actions Reasons

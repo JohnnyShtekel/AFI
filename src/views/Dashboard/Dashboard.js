@@ -561,6 +561,7 @@ const options = {
   maintainAspectRatio: false
 }
 
+const featureDropFeature = ['Shimi', 'David']
 const featureDrop = ['Shimi', 'David']
 
 class Dashboard extends Component {
@@ -675,7 +676,7 @@ class Dashboard extends Component {
                        </Dropdown>
             </Col >
             <Col sm="2">
-                <DateRangePicker startDate="1/1/2014" endDate="3/1/2014">
+                <DateRangePicker startDate="1/8/2018" endDate="10/8/2014">
                      <i className="cui-calendar icons font-4xl  mt-5"></i>
                 </DateRangePicker>
             </Col>
@@ -796,7 +797,7 @@ class Dashboard extends Component {
           </Col>
         </Row>
         <Row>
-              <Col xs="9" sm="12" lg="15" >
+              <Col xs="9" sm="12" lg="15" md="12" >
               <Card>
                 <CardHeader>
                   Manual Actions Reasons
