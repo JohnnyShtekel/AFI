@@ -157,8 +157,8 @@ const Modals = Loadable({
   loading: Loading,
 });
 
-const Graphs = Loadable({
-  loader: () => import('./views/Theme/Graphs'),
+const Performance = Loadable({
+  loader: () => import('./views/Theme/Performance'),
   loading: Loading,
 });
 
@@ -188,8 +188,8 @@ const User = Loadable({
 const routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/theme', exact: true, name: 'Theme', component: Graphs },
-  { path: '/theme/Graphs', name: 'Graphs', component: Graphs },
+  { path: '/theme', exact: true, name: 'Theme', component: Performance },
+  { path: '/theme/Performance', name: 'Performance', component: Performance },
   { path: '/theme/typography', name: 'Typography', component: Typography },
   { path: '/base', exact: true, name: 'Base', component: Cards },
   { path: '/base/cards', name: 'Cards', component: Cards },

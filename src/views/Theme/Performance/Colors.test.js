@@ -1,7 +1,7 @@
 import React from 'react';
-import Graphs from './Graphs';
+import Performance from './Performance';
 import { shallow } from 'enzyme'
 
 it('renders without crashing', () => {
-  shallow(<Graphs />);
+  shallow(<Performance />);
 });

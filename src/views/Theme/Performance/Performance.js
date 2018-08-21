@@ -370,7 +370,7 @@ class Graphs extends Component {
             <Col sm="2">
             <Dropdown isOpen={this.state.dropdownOpenDR} toggle={()=>this.toggle('dropdownOpenDR')}>
                          <DropdownToggle caret>
-                           DR taken the action
+                           User taken the action
                          </DropdownToggle>
                          <DropdownMenu>
                            {featureDrop.map((item, i) => (

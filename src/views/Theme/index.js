@@ -1,6 +1,6 @@
-import Graphs from './Graphs';
+import Performance from './Performance';
 import Typography from './Typography';
 
 export {
-  Graphs, Typography,
+  Performance, Typography,
 };

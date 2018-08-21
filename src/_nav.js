@@ -18,8 +18,8 @@ export default {
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'Graphs',
-      url: '/theme/Graphs',
+      name: 'Performance',
+      url: '/theme/Performance',
       icon: 'icon-drop',
     },
   ],

@@ -24,13 +24,13 @@ import Dashboard from './Dashboard';
 import { CoreUIIcons, Flags, FontAwesome, SimpleLineIcons } from './Icons';
 import { Alerts, Badges, Modals } from './Notifications';
 import { Login, Page404, Page500, Register } from './Pages';
-import { Graphs, Typography } from './Theme';
+import { Performance, Typography } from './Theme';
 import Widgets from './Widgets';
 
 export {
   Badges,
   Typography,
-  Graphs,
+  Performance,
   CoreUIIcons,
   Page404,
   Page500,
